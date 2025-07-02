@@ -38,7 +38,7 @@ function App() {
         <ToastContainer />
 
         <Header />
-        <main>
+        <main className="min-h[cal(100vh-120px)] pt-16">
           <Outlet />
         </main>
         <Footer />
