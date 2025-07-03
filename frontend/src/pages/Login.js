@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Context from "../context";
 
 const Login = () => {
-  const { fetchUserDetails } = useContext(Context);
+  const { fetchUserDetails, fetchUserAddToCart } = useContext(Context);
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -45,6 +45,7 @@ const Login = () => {
       toast.success(dataApi.message);
       navigate("/");
       fetchUserDetails();
+      fetchUserAddToCart();
     }
 
     if (dataApi.error) {
