@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../store/userSlice";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import role from "../common/role";
+import Context from "../context";
 
 const Header = () => {
   const user = useSelector((state) => state.user?.user);
   const dispatch = useDispatch();
   const [menuDisplay, setMenuDisplay] = useState(false);
+  const context = useContext(Context);
 
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logoutUser.url, {
@@ -87,14 +89,21 @@ const Header = () => {
             )}
           </div>
 
-          <div className="text-2xl relative cursor-pointer hover:scale-105">
-            <span>
-              <FaShoppingCart />
-            </span>
-            <div className="bg-yellow-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-4">
-              <p className="text-sm ">0</p>
-            </div>
-          </div>
+          {user?._id && (
+            <Link
+              to={"/cart"}
+              className="text-2xl relative cursor-pointer hover:scale-105"
+            >
+              <span>
+                <FaShoppingCart />
+              </span>
+
+              <div className="bg-yellow-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-4">
+                <p className="text-sm ">{context.cartProductCount}</p>
+              </div>
+            </Link>
+          )}
+
           <div>
             {user?._id ? (
               <button
