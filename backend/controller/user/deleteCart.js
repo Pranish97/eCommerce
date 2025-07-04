@@ -1,18 +1,17 @@
 const addToCartModel = require("../../models/cartProduct");
 
-const getCartProduct = async (req, res) => {
+const deleteCart = async (req, res) => {
   try {
     const currentUser = req.userId;
-    const cartProduct = await addToCartModel
-      .find({
-        userId: currentUser,
-      })
-      .populate("productId");
+    const productId = req?.body._id;
+
+    const deleteProduct = await addToCartModel.deleteOne({ _id: productId });
 
     res.json({
-      data: cartProduct,
+      message: "Product Remove from Cart!",
       success: true,
       error: false,
+      data: deleteProduct,
     });
   } catch (error) {
     res.status(400).json({
@@ -23,4 +22,4 @@ const getCartProduct = async (req, res) => {
   }
 };
 
-module.exports = getCartProduct;
+module.exports = deleteCart;
