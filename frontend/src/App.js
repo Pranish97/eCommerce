@@ -35,7 +35,6 @@ function App() {
     const dataCount = await response.json();
 
     setCartProductCount(dataCount?.data?.count);
-    console.log(cartProductCount);
   };
 
   useEffect(() => {
