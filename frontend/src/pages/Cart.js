@@ -11,7 +11,6 @@ const Cart = () => {
   const loadingCart = new Array(context.cartProductCount).fill(null);
 
   const fetchData = async () => {
-    setLoading(true);
     const response = await fetch(SummaryApi.addToCartProductView.url, {
       method: SummaryApi.addToCartProductView.method,
       credentials: "include",
@@ -19,7 +18,6 @@ const Cart = () => {
         "content-type": "application/json",
       },
     });
-    setLoading(false);
 
     const dataResponse = await response.json();
 
@@ -28,8 +26,13 @@ const Cart = () => {
     }
   };
 
+  const handleloading = async () => {
+    await fetchData();
+  };
   useEffect(() => {
-    fetchData();
+    setLoading(true);
+    handleloading();
+    setLoading(false);
   }, []);
 
   const increaseQuantity = async (id, qty) => {
@@ -152,15 +155,15 @@ const Cart = () => {
                         {product?.productId?.productName}
                       </h2>
                       <p className="capitalize text-slate-600">
-                        {product?.productId.category}
+                        {product?.productId?.category}
                       </p>
                       <div className="flex items-center justify-between">
                         <p className="text-yellow-700 font-medium text-lg">
-                          ${product?.productId.sellingPrice}
+                          ${product?.productId?.sellingPrice}
                         </p>
                         <p className="text-slate-600 font-semibold text-lg">
                           Total: $
-                          {product?.productId.sellingPrice * product?.quantity}
+                          {product?.productId?.sellingPrice * product?.quantity}
                         </p>
                       </div>
 

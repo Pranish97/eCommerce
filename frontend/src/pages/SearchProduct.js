@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SummaryApi from "../common";
+import VerticalCard from "../components/VerticalCard";
 
 const SearchProduct = () => {
   const [data, setData] = useState([]);
@@ -31,11 +32,14 @@ const SearchProduct = () => {
         <p className="text-center text-lg">No data Found!</p>
       )}
 
-      {data.length !== 0 &&
-        !loading &&
-        data.map((product, index) => {
-          return <div></div>;
-        })}
+      {data.length !== 0 && !loading && (
+        <div>
+          <p className="text-lg font-semibold my-3">
+            Search Result: {data.length}
+          </p>
+          <VerticalCard loading={loading} data={data} />
+        </div>
+      )}
     </div>
   );
 };
