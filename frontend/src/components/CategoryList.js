@@ -39,7 +39,7 @@ const CategoryList = () => {
           : categoryProdct?.map((product, index) => {
               return (
                 <Link
-                  to={"/product-category/" + product?.category}
+                  to={"/product-category?category=" + product?.category}
                   className="cursor-pointer hover:scale-105 transition-all"
                   key={product.category}
                 >
